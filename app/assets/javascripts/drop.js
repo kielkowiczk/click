@@ -1,7 +1,8 @@
 $(document).ready(function() {
-	
-//	$('#progress_bar').progressbar({disable: true});
+
 	$("#progress_bar").progressbar({ value: 37 });
+	
+	var first_load = true;
 	
 	function setup_drop_here_block() {
 		drop_here = document.getElementById('drop_here');
@@ -11,6 +12,15 @@ $(document).ready(function() {
 		drop_here.addEventListener("dragover", over_drop_block, false);
 		
 		drop_here.addEventListener("drop", droped_something, false);
+		if (first_load) {
+			$("#progress_bar").progressbar({ value: 0 });
+			first_load = false;
+		}
+		else{
+			$("#progress_bar").progressbar({ value: 100 });
+		}
+		
+	//	$('#spinner').hide();
 	}
 
 	function out_drop_block(event){
@@ -58,7 +68,17 @@ $(document).ready(function() {
 				}
 			}
 			
-			
+			xhr.upload.addEventListener("progress", function(e) {  
+			        if (e.lengthComputable) {  
+			          var percentage = Math.round((e.loaded * 100) / e.total);  
+			          $( "#progress_bar" ).progressbar( "option", "value", percentage );
+			        }  
+			      }, false);
+		    
+		    xhr.upload.addEventListener("load", function(e){  
+				          $( "#progress_bar" ).progressbar( "option", "value", 100);  
+				          $('#spinner').show();
+				      }, false);
 			
 			var body = "--" + boundary + "\r\n";  
 		  	body += "Content-Disposition: form-data; name=image; filename=" + f_name + "\r\n";  
