@@ -1,0 +1,99 @@
+body {
+		text-transform:none;
+	font:{
+		family: 'Stardos Stencil';
+	}
+}
+.content {
+	width: 900px;
+	height: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	clear: both;
+	
+}
+
+.dest {
+	width: 100%;
+}
+
+header {
+	text-transform:uppercase;
+	color: #515151; 
+	height: 100px;
+	background-color: #EEEEEE;
+	margin-bottom: 50px;
+	font: {
+		size: 50px;
+		}
+	padding: {
+		top: 10px;
+		left: 20px;
+	}
+	letter-spacing: 3px;
+	word-spacing: 10px;
+}
+
+mark.alfa_sign {
+	letter-spacing: 2px;
+	word-spacing: 10px;
+	background-color:#EEEEEE ;
+	text-transform: none;
+	color: #ff12ff;
+	font: {size: 20px;};
+}
+
+mark.by {
+	background-color:#EEEEEE ;
+	text-transform:none;
+	color: #5565d6;
+	font: {size: 25px;};
+}
+
+
+footer {
+	height: 100px;
+	background-color: #EEEEEE;
+}
+
+.box {
+	background-color: #EEEEEE;
+
+	border: {
+		style: dashed; 
+		color: #DEDEDE; 
+		width: 5px;
+	}
+//	position: relative;
+	
+	margin: 0px;
+	width: 400px;
+
+//	height: 400px;
+}
+
+.progress_bar_container {
+	clear: both;
+	padding-top: 100px;
+}
+
+.left{
+	float: left;
+}
+
+.right{
+	float: right;
+}
+
+.text_in_box{
+	color: #515151; 
+	
+	font: {
+		size: 25px; 
+	}
+	
+	text-align: center;
+	word-spacing: 4px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
