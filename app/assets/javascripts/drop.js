@@ -92,6 +92,18 @@ $(document).ready(function() {
 					   
 		}
 		
+		if (file.size > 100000){
+			alert("File is too big, please use smaller file (<100KB)")
+			return false;
+		}
+		
+		var imageType = /image\/jpeg/;
+
+	    if (!file.type.match(imageType)) {
+			alert("Plese drop only JPG files.")
+	        return false;
+	    }
+			
 		reader.readAsDataURL(file);
 	}
 	
