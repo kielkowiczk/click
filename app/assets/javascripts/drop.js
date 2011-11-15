@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	$("#progress_bar").progressbar({ value: 37 });
-	
+	$(".logout_link").click( function() { FB.logout(); }); 
 	var first_load = true;
 	
 	function setup_drop_here_block() {
