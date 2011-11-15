@@ -1,0 +1,17 @@
+-if logged_in?
+  #dest.dest
+    #spinner
+      = image_tag 'spinner.gif'
+    #result_image.box.right
+      %p.text_in_box
+        Result image
+    #drop_here.box.left
+      %p.text_in_box
+        Drop image here
+    .progress_bar_container
+      #progress_bar
+  -else
+    .fb-login-button
+    %p
+      Plese login!
+    
