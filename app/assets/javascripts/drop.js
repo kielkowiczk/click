@@ -20,7 +20,6 @@ $(document).ready(function() {
 			$("#progress_bar").progressbar({ value: 100 });
 		}
 		
-	//	$('#spinner').hide();
 	}
 
 	function out_drop_block(event){
