@@ -10,7 +10,8 @@ gem 'sqlite3'
 gem 'json'
 gem 'haml'
 gem 'rmagick'
-gem 'koala' # fr facebook
+gem 'koala' # for facebook
+gem 'gritter' # for grow like notification system.
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -110,10 +110,28 @@ $(document).ready(function() {
 	  	prevent_default(event);
 	  
 		files_droped = event.dataTransfer.files;
+		var file = files_droped[0];
 		
+		if (file.size > 100000){
+			$.gritter.add({title: 'File size error!', text: 'Please use smaller image file! File should be less then 100KB!', image: error_img_path });
+			set_border_color_normal();
+			
+			return false;
+		}
+		
+		var imageType = /image\/jpeg/;
+
+	    if (!file.type.match(imageType)) {
+			$.gritter.add({title: 'File type error!', text: 'Please use only JPG files.', image: error_img_path });
+
+	        set_border_color_normal();
+			return false;
+	    }
+	
 		if (files_droped.length >= 1)
 			do_funky_stuff_with_droped_file(files_droped[0]);
-	
+		
+		return false;
 	}
 	
 	setup_drop_here_block();
