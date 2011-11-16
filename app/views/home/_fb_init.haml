@@ -10,4 +10,4 @@
     xfbml      : true  // parse XFBML
   });
   
-  FB.Event.subscribe('auth.authResponseChange', function() { window.location.reload(); });
+  FB.Event.subscribe('auth.authResponseChange', function() { setTimeout('location.reload(true)', 1); });
