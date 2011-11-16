@@ -1,1 +1,7 @@
-Saimple application for interview.
+Making Two Tone Silhouette effect from image droped(!) on browser window.
+
+Configuration:
+  1. Create config/initializers/secret.rb file with FB_APP_SECRET constant set to facebook secreat key.
+
+Dependences: 
+  All in Gemfile + imagemagick.
