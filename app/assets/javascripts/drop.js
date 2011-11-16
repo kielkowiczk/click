@@ -1,9 +1,11 @@
 $(document).ready(function() {
-
-	$("#progress_bar").progressbar({ value: 37 });
-	$(".logout_link").click( function() { FB.logout(); }); 
-	var first_load = true;
+	$(".logout_link").click( function() { FB.logout(); });
 	
+	$("#progress_bar").progressbar({value: 0, create: function() { 
+		$("#progress_bar").hide();
+		}, 
+		complete: function(event, ui) { $("#progress_bar").fadeOut('slow'); } });
+
 	function setup_drop_here_block() {
 		drop_here = document.getElementById('drop_here');
 		
@@ -12,19 +14,16 @@ $(document).ready(function() {
 		drop_here.addEventListener("dragover", over_drop_block, false);
 		
 		drop_here.addEventListener("drop", droped_something, false);
-		if (first_load) {
-			$("#progress_bar").progressbar({ value: 0 });
-			first_load = false;
-		}
-		else{
-			$("#progress_bar").progressbar({ value: 100 });
-		}
 		
 	}
 
+	function set_border_color_normal() {
+		$('#drop_here').css({'border-color': '#DEDEDE'});	
+	}
+	
 	function out_drop_block(event){
 		prevent_default(event);
-		$('#drop_here').css({'border-color': '#DEDEDE'});
+		set_border_color_normal();
 	}
 	
 	function over_drop_block(event) {
@@ -53,7 +52,7 @@ $(document).ready(function() {
 			
 			xhr = new XMLHttpRequest();
 			
-			xhr.open("POST", "http://localhost:3000/upload", true);
+			xhr.open("POST", app_root_path + "/upload", true);
 			
 			xhr.setRequestHeader("Content-Type", "multipart/form-data, boundary="+boundary);
 			xhr.setRequestHeader("Content-Length", f_size);
@@ -70,13 +69,12 @@ $(document).ready(function() {
 			xhr.upload.addEventListener("progress", function(e) {  
 			        if (e.lengthComputable) {  
 			          var percentage = Math.round((e.loaded * 100) / e.total);  
-			          $( "#progress_bar" ).progressbar( "option", "value", percentage );
+			          $( "#progress_bar" ).progressbar( {value:  percentage} );
 			        }  
 			      }, false);
 		    
-		    xhr.upload.addEventListener("load", function(e){  
-				          $( "#progress_bar" ).progressbar( "option", "value", 100);  
-				          $('#spinner').show();
+		    xhr.upload.addEventListener("load", function(e) {  
+				          $("#progress_bar").progressbar({value: 100});
 				      }, false);
 			
 			var body = "--" + boundary + "\r\n";  
@@ -91,18 +89,8 @@ $(document).ready(function() {
 					   
 		}
 		
-		if (file.size > 100000){
-			alert("File is too big, please use smaller file (<100KB)")
-			return false;
-		}
+		$("#progress_bar").fadeIn('slow');
 		
-		var imageType = /image\/jpeg/;
-
-	    if (!file.type.match(imageType)) {
-			alert("Plese drop only JPG files.")
-	        return false;
-	    }
-			
 		reader.readAsDataURL(file);
 	}
 	
