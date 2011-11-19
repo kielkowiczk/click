@@ -233,5 +233,7 @@ $(document).ready(function() {
 		return false;
 	}
 	
-	setup_drop_here_block();
+	if (FB.getUserID() != 0) {
+		setup_drop_here_block();
+	}
 });
