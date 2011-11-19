@@ -16,7 +16,16 @@ $(document).ready(function() {
 		drop_here.addEventListener("drop", droped_something, false);
 		
 	}
-
+	
+	filereader = false;
+	
+	if (window.File && window.FileReader && window.FileList && window.Blob) {
+		filereader = true;
+	}else {
+		$('#no_support_modal').dialog({modal: true, draggable: false, resizable: false, closeOnEscape: false, width: 600});
+		$(".ui-dialog-titlebar").hide();
+		
+	}
 	function set_border_color_normal() {
 		$('#drop_here').css({'border-color': '#DEDEDE'});	
 	}
