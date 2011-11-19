@@ -12,6 +12,7 @@ gem 'haml'
 gem 'rmagick'
 gem 'koala' # for facebook
 gem 'gritter' # for grow like notification system.
+gem "redis" #store for images.
 
 # Gems used only for assets and not required
 # in production environments by default.

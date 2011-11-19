@@ -1,5 +1,15 @@
 $(document).ready(function() {
 	$(".logout_link").click( function() { FB.logout(); });
+	$("#first_quantize_slider").slider({
+		change: function() {
+			$.ajax({ 
+				url: 'http://localhost:3000/process',
+				type: 'POST',
+				data: 'first_quantize_slider='+$("#first_quantize_slider").slider('value'),
+				success: function(data) { $('#result_image').html(data) }
+			})
+		}
+	});
 	
 	$("#progress_bar").progressbar({value: 0, create: function() { 
 		$("#progress_bar").hide();
