@@ -1,5 +1,6 @@
 .bundle
 config/initializers/secrets.rb
+dump.rdb
 db/*.sqlite3
 log/*.log
 tmp/
