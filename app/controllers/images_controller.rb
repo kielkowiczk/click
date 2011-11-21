@@ -17,18 +17,18 @@ class ImagesController < ApplicationController
        }
     end
     
+    $redis.set user_fb_id.to_s, Marshal.dump(@img)
+        
     @img_org = @img.clone
     
     @img = do_something_with_image @img
-    $redis.set user_fb_id.to_s, Marshal.dump(@img)
+
     
     @img_width = @img.rows
     @img_height = @img.columns
     
     @img = @url_encode_profix + Base64.encode64(@img.to_blob)
     @img_org = @url_encode_profix + Base64.encode64(@img_org.to_blob)
-    
-    
     
     render :layout => false
   end
@@ -38,7 +38,7 @@ class ImagesController < ApplicationController
     
     @img = Marshal.load($redis.get user_fb_id.to_s)
  
-    @img = do_something_with_image(@img, params[:first_quantize_slider].to_i)
+    @img = do_something_with_image(@img, params[:first_slider].to_i)
 
     @img = @url_encode_profix + Base64.encode64(@img.to_blob)
     
@@ -48,6 +48,7 @@ class ImagesController < ApplicationController
   private
   def do_something_with_image(img, first = 256)
  
-    img.quantize(256, Magick::GRAYColorspace).segment(Magick::GRAYColorspace, 10, first).quantize(2, Magick::GRAYColorspace, Magick::NoDitherMethod)
+    #img.quantize(first, Magick::GRAYColorspace, Magick::NoDitherMethod) 
+    img.segment(Magick::GRAYColorspace, 0.1, 1.5).gaussian_blur(0.0,0.5).quantize(2, Magick::GRAYColorspace, Magick::NoDitherMethod).gaussian_blur(0.0,0.5)
   end
 end

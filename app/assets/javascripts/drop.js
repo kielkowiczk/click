@@ -1,13 +1,20 @@
 $(document).ready(function() {
 	$(".logout_link").click( function() { FB.logout(); });
-	$("#first_quantize_slider").slider({
+	
+	$("#first_slider").slider({
+		min: 0,
+		max: 255,
 		change: function() {
 			$.ajax({ 
 				url: 'http://localhost:3000/process',
 				type: 'POST',
-				data: 'first_quantize_slider='+$("#first_quantize_slider").slider('value'),
+				data: 'first_slider='+$("#first_slider").slider('value'),
 				success: function(data) { $('#result_image').html(data) }
 			})
+		},
+		slide: function () {
+			$('#first_slider_value').html($("#first_slider").slider('value'));
+
 		}
 	});
 	
