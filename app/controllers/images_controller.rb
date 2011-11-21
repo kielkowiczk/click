@@ -39,15 +39,17 @@ class ImagesController < ApplicationController
     @img = do_something_with_image(@img, params[:blur_slider].to_i, params[:segmentation_slider].to_i)
 
     @img = @url_encode_profix + Base64.encode64(@img.to_blob)
-    
+
     render :layout => false
   end
   
   private
+
   def do_something_with_image(img, blur = 2, segmentation = 15)
     blur = blur/10.0
     segmentation = segmentation/10.0
 
     img.segment(Magick::GRAYColorspace, 1.0, segmentation).gaussian_blur(0.0,0.5).quantize(2, Magick::GRAYColorspace, Magick::NoDitherMethod).gaussian_blur(0.0,blur)
+
   end
 end
