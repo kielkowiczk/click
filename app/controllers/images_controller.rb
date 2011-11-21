@@ -24,12 +24,12 @@ class ImagesController < ApplicationController
     @img = @url_encode_profix + Base64.encode64(@img.to_blob)
     @img_org = @url_encode_profix + Base64.encode64(@img_org.to_blob)
     
-    
     render :layout => false
   end
   
   private
   def do_something_with_image img
-    img.quantize(256, Magick::GRAYColorspace).segment(Magick::GRAYColorspace, 10, 4).quantize(2, Magick::GRAYColorspace, Magick::NoDitherMethod)
+    #img.quantize(256, Magick::GRAYColorspace).segment(Magick::GRAYColorspace, 10, 4).quantize(2, Magick::GRAYColorspace, Magick::NoDitherMethod)
+    img.segment(Magick::GRAYColorspace, 0.1, 1.5).gaussian_blur(0.0,0.5).quantize(2, Magick::GRAYColorspace, Magick::NoDitherMethod).gaussian_blur(0.0,0.5)
   end
 end
