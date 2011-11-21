@@ -9,7 +9,7 @@ gem 'sqlite3'
 
 gem 'json'
 gem 'haml'
-gem 'rmagick'
+gem 'rmagick', :require => 'RMagick' #hack for debian and *nix systems
 gem 'koala' # for facebook
 gem 'gritter' # for grow like notification system.
 gem "redis" #store for images.
