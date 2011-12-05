@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	tour();
+	$('a.pageslide').pageSlide({ width: "350px", direction: "left" });
 	$(".logout_link").click( function() { FB.logout(); });
 	
 	$("#first_slider").slider({
