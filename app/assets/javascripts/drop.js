@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	tour();
 	$(".logout_link").click( function() { FB.logout(); });
 	
 	$("#first_slider").slider({
