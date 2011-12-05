@@ -1,9 +1,20 @@
 body {
-		text-transform:none;
+	text-transform:none;
+	
 	font:{
 		family: 'Stardos Stencil';
 	}
+	
+	margin: 0px;
+	padding: 0px;
 }
+
+#pageslide-slide-wrap {
+	background: {
+		color: black;
+	};
+}
+
 .content {
 	width: 900px;
 	height: 600px;
@@ -15,6 +26,7 @@ body {
 
 .dest {
 	width: 100%;
+	padding-top: 20px;
 }
 
 header {
@@ -22,14 +34,15 @@ header {
 	color: #515151; 
 	height: 100px;
 	background-color: #EEEEEE;
-	margin-bottom: 50px;
+	margin-bottom: 10px;
 	font: {
 		size: 40px;
-		}
+	}
 	padding: {
 		top: 10px;
 		left: 20px;
 	}
+	
 	letter-spacing: 3px;
 	word-spacing: 5px;
 }
@@ -40,14 +53,18 @@ mark.alfa_sign {
 	background-color:#EEEEEE ;
 	text-transform: none;
 	color: #ff12ff;
-	font: {size: 15px;};
+	font: {
+		size: 15px;
+	};
 }
 
 mark.by {
 	background-color:#EEEEEE ;
 	text-transform:none;
 	color: #5565d6;
-	font: {size: 20px;};
+	font: {
+		size: 20px;
+	};
 }
 
 
@@ -58,25 +75,25 @@ footer {
 	color: #515151; 
 	height: 100px;
 
-
 	font: {
 		size: 20px;
-		}
+	}
+	
 	text-align: center;
 	letter-spacing: 3px;
 	word-spacing: 10px;
-	
 }
 
 footer p {
 	padding-top: 20px;
 }
+
 footer mark {
 	background-color:#EEEEEE ;
 }
+
 footer mark.company_name {
 	color: #ff12ff;
-	
 }
 
 .box {
@@ -87,17 +104,14 @@ footer mark.company_name {
 		color: #DEDEDE; 
 		width: 5px;
 	}
-//	position: relative;
 	
 	margin: 0px;
 	width: 400px;
-
-//	height: 400px;
 }
 
 .progress_bar_container {
 	clear: both;
-	padding-top: 100px;
+	padding-top: 10px;
 }
 
 .left{
@@ -124,4 +138,31 @@ footer mark.company_name {
 	word-spacing: 4px;
 	padding-top: 20px;
 	padding-bottom: 20px;
+}
+
+.controllers {
+	clear:both; 
+	margin-top: 330px; 
+	width: 200px;
+	padding-top: 20px;
+}
+
+.sliders {
+	width: 100px;
+	margin-bottom: 5px;
+}
+
+.values {
+	width: 20px; 
+	position: relative; 
+	top: -25px; 
+	left: 120px
+}
+
+.spinner {
+	position: relative; 
+	left: 23px;
+	top: 130px;
+//	display: none;
+	visibility:hidden;
 }

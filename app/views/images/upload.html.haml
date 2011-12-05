@@ -1,9 +1,7 @@
-#spinner
-  = image_tag 'spinner.gif'
-#result_image.box.right
-  %img{:src=>"#{@img}"}
+= image_tag 'spinner.gif', :class => 'spinner'
+#result_image.box.right.zoom_to
+  %img{:src=>"#{@img}", :class => 'image'}
 #drop_here.box.left
   %img{:src=>"#{@img_org}"}
-
   
   

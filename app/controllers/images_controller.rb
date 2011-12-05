@@ -11,7 +11,6 @@ class ImagesController < ApplicationController
     @img = @imgs.first
 
     if @img.columns > 400 or @img.rows > 400 then
-      # @img = @img.resize_to_fill(400, 400);
       @img = @img.change_geometry('400x400>') { |cols, rows, imgage|
         imgage.resize!(cols, rows)
        }
@@ -22,7 +21,6 @@ class ImagesController < ApplicationController
     @img_org = @img.clone
     
     @img = do_something_with_image @img
-
     
     @img_width = @img.rows
     @img_height = @img.columns
@@ -38,7 +36,7 @@ class ImagesController < ApplicationController
     
     @img = Marshal.load($redis.get user_fb_id.to_s)
  
-    @img = do_something_with_image(@img, params[:first_slider].to_i)
+    @img = do_something_with_image(@img, params[:blur_slider].to_i, params[:segmentation_slider].to_i)
 
     @img = @url_encode_profix + Base64.encode64(@img.to_blob)
     
@@ -46,9 +44,10 @@ class ImagesController < ApplicationController
   end
   
   private
-  def do_something_with_image(img, first = 256)
- 
-    #img.quantize(first, Magick::GRAYColorspace, Magick::NoDitherMethod) 
-    img.segment(Magick::GRAYColorspace, 0.1, 1.5).gaussian_blur(0.0,0.5).quantize(2, Magick::GRAYColorspace, Magick::NoDitherMethod).gaussian_blur(0.0,0.5)
+  def do_something_with_image(img, blur = 2, segmentation = 15)
+    blur = blur/10.0
+    segmentation = segmentation/10.0
+
+    img.segment(Magick::GRAYColorspace, 1.0, segmentation).gaussian_blur(0.0,0.5).quantize(2, Magick::GRAYColorspace, Magick::NoDitherMethod).gaussian_blur(0.0,blur)
   end
 end

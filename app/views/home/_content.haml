@@ -1,20 +1,20 @@
 -if logged_in?
   #dest.dest
-    #spinner
-      = image_tag 'spinner.gif'
-    #result_image.box.right
     #result_image.box.right.tour2
       %p.text_in_box
         Result image
-    #drop_here.box.left
     #drop_here.box.left.tour1
       %p.text_in_box
         Drop image here
-  
+ 
   = render 'controllers'
   
   .progress_bar_container
     #progress_bar
+
+  %a.pageslide{:href=>'/order'}
+    order
+  
 -else
   .fb-login-button
   %p
