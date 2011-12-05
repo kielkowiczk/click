@@ -32,6 +32,19 @@ $(document).ready(function() {
 		
 		drop_here.addEventListener("drop", droped_something, false);
 		
+		$(".zoom_to").click(function(evt) {
+							evt.stopPropagation();
+							evt.preventDefault();
+
+							$(this).zoomTo({debug:true});
+		})
+		
+		$(window).click(function(evt) {
+							evt.stopPropagation();
+							$("body").zoomTo({targetsize:1.0});
+		});
+		
+
 	}
 
 	function set_border_color_normal() {
