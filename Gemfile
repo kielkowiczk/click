@@ -16,6 +16,8 @@ gem "redis" #store for images.
 
 gem 'therubyracer' # JS runtime
 
+gem 'therubyracer' # JS runtime
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

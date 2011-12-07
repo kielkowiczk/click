@@ -53,7 +53,6 @@ class ImagesController < ApplicationController
     $redis.set user_fb_id.to_s, Marshal.dump(@croped_image)
     @croped_image = @url_encode_profix + Base64.encode64(@croped_image.to_blob)
 
-    
     render :layout => false
   end
   
