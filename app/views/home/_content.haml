@@ -12,8 +12,13 @@
   .progress_bar_container
     #progress_bar
 
+  -#%button.pageslide_button
+    -#Order!
   %a.pageslide{:href=>'/order'}
     order
+
+  .info_about_me.zoom_to
+    = render 'author'
   
 -else
   .fb-login-button

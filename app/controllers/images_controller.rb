@@ -21,7 +21,9 @@ class ImagesController < ApplicationController
     @img_org = @img.clone
     
     @img = do_something_with_image @img
-    
+
+    $redis.set user_fb_id.to_s, Marshal.dump(@img)
+
     @img_width = @img.rows
     @img_height = @img.columns
     
@@ -32,7 +34,7 @@ class ImagesController < ApplicationController
   end
   
   def update_image
-    @url_encode_profix='data:image/jpeg;base64,'
+    @url_encode_profix = 'data:image/jpeg;base64,'
     
     @img = Marshal.load($redis.get user_fb_id.to_s)
  
@@ -40,6 +42,18 @@ class ImagesController < ApplicationController
 
     @img = @url_encode_profix + Base64.encode64(@img.to_blob)
 
+    render :layout => false
+  end
+  
+  def crop
+    @url_encode_profix='data:image/jpeg;base64,'
+    @img = Marshal.load($redis.get user_fb_id.to_s)
+    
+    @croped_image = @img.crop(params[:x].to_i, params[:y].to_i, params[:w].to_i, params[:h].to_i)
+    $redis.set user_fb_id.to_s, Marshal.dump(@croped_image)
+    @croped_image = @url_encode_profix + Base64.encode64(@croped_image.to_blob)
+
+    
     render :layout => false
   end
   

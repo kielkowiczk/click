@@ -1,108 +1,5 @@
-$(document).ready(function() {
-
-	tour();
-	
-	sliders_enabled = false;
-	
-	$('.alfa_sign').slideto({
-		target: '.dest',
-		speed: 'slow'
-	});
-	
-	
-
-	
-	$('a.pageslide').pageSlide({ width: "350px", direction: "left" });
-					
-	function toogle_sliders(force) {
-		if (typeof force == "undefined"){
-			if (sliders_enabled) {
-				$("#blur_slider").slider({ disabled: true});
-				$("#segmentation_slider").slider({ disabled: true});
-			
-				sliders_enabled = false;
-			}else {
-				$("#blur_slider").slider({ disabled: false});
-				$("#segmentation_slider").slider({ disabled: false});
-			
-				sliders_enabled = true;
-			}
-		}else{
-				$("#blur_slider").slider({ disabled: !force.to});
-				$("#segmentation_slider").slider({ disabled: !force.to});
-				sliders_enabled = force.to
-		}
-	}
-	
-	$(".logout_link").click( function() { FB.logout(); });
-	
-	$("#blur_slider").slider({
-		disabled: true,
-		min: 1,
-		max: 10,
-		change: function() {
-			$.ajax({
-				url: 'http://localhost:3000/process',
-				type: 'POST',
-				data: 'blur_slider='+$("#blur_slider").slider('value') +"&" + 'segmentation_slider='+$("#sementation_slider").slider('value') + '&authenticity_token='+encodeURIComponent(authenticity_token),
-				beforeSend: function() { 
-					$('.spinner').css({visibility: 'visible'})		
-					toogle_sliders(); 				
-					}, 
-
-				success: function(data) { 
-					$('#result_image').html(data); 
-					toogle_sliders(); 
-					$('.spinner').css({visibility: 'hidden'})
-				}
-			})
-		},
-		slide: function () {
-			$('#blur_slider_value').html($("#blur_slider").slider('value'));
-
-		}
-	});
-	
-	$("#segmentation_slider").slider({
-		disabled: true,
-		min: 0,
-		max: 20,
-		change: function() {
-			$.ajax({
-				url: 'http://localhost:3000/process',
-				type: 'POST',
-				data: 'blur_slider='+$("#blur_slider").slider('value') +"&" + 'segmentation_slider='+$("#segmentation_slider").slider('value') + '&authenticity_token='+encodeURIComponent(authenticity_token),
-				beforeSend: function() {
-				$('.spinner').css({visibility: 'visible'})
-					toogle_sliders(); 
-					$("#result_image").animate({borderColor: 'yellow'}, "fast").animate({borderColor: '#DEDEDE'}, "fast");
-				}, 
-				success: function(data) { 
-					$('#result_image').html(data); 
-					toogle_sliders(); 
-					$('.spinner').css({visibility: 'hidden'}) 
-				}
-			})
-		},
-		slide: function () {
-			$('#segmentation_slider_value').html($("#segmentation_slider").slider('value'));
-
-		}
-	});
-	
-	$("#progress_bar").progressbar({
-		value: 0, 
-		create: function() { 
-			$("#progress_bar").hide();
-			}, 
-		complete: function(event, ui) { 
-			$("#progress_bar").fadeOut('slow'); 
-			} 
-	});
-
 	function setup_drop_here_block() {
-			$('.image').Jcrop();
-			
+		$('.image').Jcrop({onSelect: update_selection_attributes, onChange: print_cord });
 			
 		drop_here = document.getElementById('drop_here');
 		
@@ -111,20 +8,6 @@ $(document).ready(function() {
 		drop_here.addEventListener("dragover", over_drop_block, false);
 		
 		drop_here.addEventListener("drop", droped_something, false);
-		
-		$(".zoom_to").click(function(evt) {
-							evt.stopPropagation();
-							evt.preventDefault();
-
-							$(this).zoomTo({debug:true});
-		})
-		
-		$(window).click(function(evt) {
-							evt.stopPropagation();
-							$("body").zoomTo({targetsize:1.0});
-		});
-		
-
 	}
 	
 	filereader = false;
@@ -136,6 +19,7 @@ $(document).ready(function() {
 		$(".ui-dialog-titlebar").hide();
 		
 	}
+	
 	function set_border_color_normal() {
 		$('#drop_here').css({'border-color': '#DEDEDE'});	
 	}
@@ -181,7 +65,7 @@ $(document).ready(function() {
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					document.getElementById('dest').innerHTML = xhr.response;
-					toogle_sliders( {to: true} );
+					toogle_controllers( {to: true, button: false} );
 					setup_drop_here_block();
 				}
 			}
@@ -242,7 +126,4 @@ $(document).ready(function() {
 		return false;
 	}
 	
-	if (FB.getUserID() != 0) {
-		setup_drop_here_block();
-	}
-});
+

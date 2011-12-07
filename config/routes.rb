@@ -1,9 +1,10 @@
 TwoTonesPictures::Application.routes.draw do
   match 'upload' => 'images#upload', :via => :post
   match 'process' => 'images#update_image', :via => :post
- 
+  match 'crop_image' => "images#crop", :via => :post
+   
   match 'order' => 'orders#make'
-  
+
   root :to => 'home#index'
   
   # The priority is based upon order of creation:
